@@ -1,3 +1,49 @@
-[gd_scene format=3 uid="uid://2daq8ky7qwiq"]
+[gd_scene load_steps=5 format=3 uid="uid://2daq8ky7qwiq"]
 
-[node name="Node2D" type="Node2D"]
+[ext_resource type="Script" path="res://BlindCharacter.gd" id="1_lq0ke"]
+[ext_resource type="Texture2D" uid="uid://cnetsnvv860cg" path="res://images/fd8362536b38adca704c15aa071b64d3e7c17679_2_500x500.png" id="1_mjmpq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_me4k1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hn4cx"]
+size = Vector2(5, 50)
+
+[node name="Dundee" type="Node2D"]
+
+[node name="BlindCharacter" type="CharacterBody2D" parent="."]
+script = ExtResource("1_lq0ke")
+
+[node name="TopDownSprite" type="Sprite2D" parent="BlindCharacter"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_mjmpq")
+
+[node name="CircleCollider" type="CollisionShape2D" parent="BlindCharacter"]
+scale = Vector2(2.7, 2.7)
+shape = SubResource("CircleShape2D_me4k1")
+
+[node name="Camera2D" type="Camera2D" parent="BlindCharacter"]
+position_smoothing_enabled = true
+
+[node name="StickPivot" type="Marker2D" parent="BlindCharacter"]
+position = Vector2(0, -25)
+
+[node name="Stick" type="Line2D" parent="BlindCharacter/StickPivot"]
+points = PackedVector2Array(0, 0, 0, -26.2824, 0, -50)
+width = 5.0
+
+[node name="Area2D" type="Area2D" parent="BlindCharacter/StickPivot"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlindCharacter/StickPivot/Area2D"]
+position = Vector2(0, -25)
+shape = SubResource("RectangleShape2D_hn4cx")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(71, -33)
+scale = Vector2(1.17677, -1.25354)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(11.0472, -94.1334, 246.437, -118.066, 292.326, 38.2916, 7.62939e-06, 2.39322)
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(69, -32, 83, 89, 361, 114, 415, -77)
+closed = true
